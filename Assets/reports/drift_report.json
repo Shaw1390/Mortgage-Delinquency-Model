@@ -1,0 +1,38 @@
+{
+  "feature_drift": {
+    "credit_score": {
+      "psi": 0.4604,
+      "status": "Trigger off-cycle review"
+    },
+    "original_dti": {
+      "psi": 0.878,
+      "status": "Trigger off-cycle review"
+    },
+    "original_ltv": {
+      "psi": 0.0438,
+      "status": "Stable"
+    },
+    "original_interest_rate": {
+      "psi": 8.1506,
+      "status": "Trigger off-cycle review"
+    },
+    "original_upb": {
+      "psi": 0.0595,
+      "status": "Stable"
+    }
+  },
+  "prediction_score_psi": {
+    "psi": 1.1,
+    "status": "Trigger off-cycle review"
+  },
+  "monitor_performance": {
+    "auc": 0.777,
+    "precision": 0.1846,
+    "recall": 0.0811,
+    "validation_auc": 0.777,
+    "auc_drop": 0.0,
+    "status": "Within tolerance"
+  },
+  "monitor_default_rate": 0.0326,
+  "train_default_rate": 0.1394
+}

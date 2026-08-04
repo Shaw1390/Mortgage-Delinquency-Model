@@ -1,0 +1,8 @@
+monitoring_signal,value,threshold,governance_action
+PSI: credit_score,0.4604,< 0.1 stable / < 0.25 flag / >= 0.25 trigger,Trigger off-cycle review
+PSI: original_dti,0.878,< 0.1 stable / < 0.25 flag / >= 0.25 trigger,Trigger off-cycle review
+PSI: original_ltv,0.0438,< 0.1 stable / < 0.25 flag / >= 0.25 trigger,Stable
+PSI: original_interest_rate,8.1506,< 0.1 stable / < 0.25 flag / >= 0.25 trigger,Trigger off-cycle review
+PSI: original_upb,0.0595,< 0.1 stable / < 0.25 flag / >= 0.25 trigger,Stable
+PSI: prediction score,1.1,< 0.1 stable / < 0.25 flag / >= 0.25 trigger,Trigger off-cycle review
+AUC drop vs. validation,0.0,>= 0.05 escalate,Within tolerance
