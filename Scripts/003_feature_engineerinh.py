@@ -1,18 +1,4 @@
-"""
-03_feature_engineering.py  (Gold layer)
 
-Takes loan_level_labeled.csv (output of phases 1-2) and builds the
-model-ready "Gold" table:
-  - drops columns that are IDs, near-empty, or would leak information
-  - buckets a few continuous features (credit score, DTI) into the
-    categories underwriters actually think in
-  - one-hot encodes categorical fields
-  - splits into gold_train.csv (2005-2007) and gold_monitor.csv (2011-2012)
-    using the same encoded column set, so the monitor set can be scored
-    by a model trained only on gold_train.csv
-
-Run after phase 2:  python 03_feature_engineering.py
-"""
 
 import os
 import json
@@ -20,18 +6,7 @@ import pandas as pd
 
 from config import CLEANED_DIR, GOLD_DIR, TRAIN_YEARS, MONITOR_YEARS, TARGET_COL
 
-# Columns we deliberately do NOT feed to the model:
-#   - loan_id: identifier, not a feature
-#   - seller_name: almost entirely "OTHER" in the public dataset, no signal
-#   - first_payment_date / maturity_date: redundant with vintage_year + loan term
-#   - msa / postal_code: high-cardinality / mostly blank in the sample data
-#   - pre_harp_loan_id / special_eligibility_program / harp_indicator: not
-#     relevant for 2005-2012 originations, HARP didn't exist yet
-#   - property_valuation_method: valuation method, not a risk driver at origination
-#   - vantage_score_4_0: almost entirely "Not Available" for this era, see
-#     the credit_score sanity check from phase 1
-#   - super_conforming_flag: near-constant "N" for this sample -- no signal
-DROP_COLS = [
+
     "loan_id", "seller_name", "first_payment_date", "maturity_date",
     "msa", "postal_code", "pre_harp_loan_id", "special_eligibility_program",
     "harp_indicator", "property_valuation_method", "vantage_score_4_0",
