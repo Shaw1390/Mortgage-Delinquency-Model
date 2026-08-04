@@ -1,5 +1,3 @@
-
-
 import os
 import pandas as pd
 
@@ -12,13 +10,7 @@ SERIOUS_DELINQUENCY_THRESHOLD = 3
 
 
 def delinquency_severity(status):
-    """
-    Converts current_delinquency_status into a comparable severity number.
-    'R' (REO) is treated as more severe than any months-past-due count.
-    Anything unparseable comes back as -1 (i.e. "unknown", not counted
-    as delinquent -- we don't want a data quality issue to inflate the
-    default rate).
-    """
+
     if pd.isna(status):
         return -1
     status = str(status).strip()
