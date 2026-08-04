@@ -1,0 +1,28 @@
+{
+  "primary_model": "Logistic Regression",
+  "logistic_regression": {
+    "auc": 0.777,
+    "precision": 0.4746,
+    "recall": 0.0514,
+    "confusion_matrix": {
+      "tn": 25581,
+      "fp": 238,
+      "fn": 3966,
+      "tp": 215
+    }
+  },
+  "hist_gradient_boosting_benchmark": {
+    "auc": 0.781,
+    "precision": 0.5389,
+    "recall": 0.0447,
+    "confusion_matrix": {
+      "tn": 25659,
+      "fp": 160,
+      "fn": 3994,
+      "tp": 187
+    }
+  },
+  "n_train": 120000,
+  "n_validation": 30000,
+  "train_default_rate": 0.1394
+}

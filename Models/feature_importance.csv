@@ -1,0 +1,50 @@
+feature,coefficient
+credit_score,-0.4998128864799949
+num_borrowers,-0.301316737115702
+original_cltv,0.29819366725540336
+original_ltv,0.22612714818623977
+original_loan_term,0.2242481094014069
+loan_purpose_P,-0.19754586867640986
+original_interest_rate,0.1831448851329782
+original_dti,0.18114723297378793
+credit_score_bucket_Unknown,-0.17112761427793274
+loan_purpose_C,0.16392943572013596
+original_upb,0.11269098685656857
+credit_score_bucket_Excellent (800+),-0.11249150573767354
+credit_score_bucket_Near-prime (620-679),0.11169269661273391
+property_region_West,0.1010413563129671
+credit_score_bucket_Super-prime (740-799),-0.09221345667858433
+dti_bucket_Unknown,0.09114118966278613
+first_time_homebuyer_flag_9,-0.08093026658049549
+property_region_Midwest,-0.07486357933970865
+property_type_MH,0.06551867043174048
+credit_score_bucket_Prime (680-739),0.05529879680908139
+property_type_CO,0.04733851609340004
+loan_purpose_N,0.04708379740181292
+property_region_Other,0.04706001153193652
+credit_score_bucket_Subprime (<620),0.04601268544023185
+dti_bucket_Low (<30),-0.0454435135609288
+property_region_Northeast,-0.03699037393069396
+num_units,0.036896453736588966
+channel_T,0.03423797501896876
+channel_R,-0.03296171950859294
+property_type_SF,-0.029639817928671403
+high_ltv_flag,0.029020236484727832
+mi_pct,0.02814099274859696
+property_type_CP,-0.021037071355652
+occupancy_status_I,0.01873847642710321
+property_type_PU,-0.018429326855978114
+occupancy_status_P,-0.01741688722982513
+dti_bucket_High (43+),0.015025042634205954
+first_time_homebuyer_flag_Y,0.013867836669506504
+channel_C,-0.012263042988835944
+channel_B,-0.011975277565553867
+first_time_homebuyer_flag_N,-0.010029836946726937
+occupancy_status_S,0.005176913253045805
+ppm_flag_Y,0.003982380144026925
+ppm_flag_N,-0.003982380144026703
+property_region_South,0.0011527968003203317
+dti_bucket_Moderate (30-42),-0.0007523964912643803
+amortization_type_FRM,0.0
+io_indicator_N,0.0
+property_type_99,0.0
