@@ -1,19 +1,3 @@
-"""
-05_generate_model_card.py
-
-Generates Model_Card_Validation_Report.docx -- a real model risk artifact,
-not a generic template. It pulls actual numbers from metrics.json (phase 4)
-and, if it's already been run, drift_report.json / governance_status.csv
-(phase 6) so the document reflects your real results rather than placeholder
-text.
-
-Run this AFTER phase 4. Running it again after phase 6 will include the
-monitoring section too -- if phase 6 hasn't run yet, that section is
-skipped with a note, so run order doesn't cause an error either way.
-
-Run:  python 05_generate_model_card.py
-"""
-
 import os
 import json
 import pandas as pd
