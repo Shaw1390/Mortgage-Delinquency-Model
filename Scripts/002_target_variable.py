@@ -1,38 +1,14 @@
-"""
-02_build_target_label.py
 
-Builds the target variable: "ever_90dpd" -- did this loan reach 90+ days
-past due, or REO, at ANY point in its performance history. This collapses
-the many-rows-per-loan performance file down to one label per loan, which
-is what lets you join it onto the one-row-per-loan origination file.
-
-current_delinquency_status is coded as months past due:
-    "0"      = current
-    "1"      = 30 days late
-    "2"      = 60 days late
-    "3"      = 90 days late
-    "4","5"...= further past due
-    "R"      = REO (bank-owned, post-foreclosure)
-
-We treat 3+ months past due OR "R" as "seriously delinquent."
-
-HOW TO USE:
-    1. Make sure 01_load_and_clean.py has already run and produced
-       origination_clean.csv and performance_clean.csv.
-    2. Edit CLEANED_DIR below if needed.
-    3. Run directly: python 02_build_target_label.py
-"""
 
 import os
 import pandas as pd
 
-# ---------------------------------------------------------------------------
-# EDIT THIS IF NEEDED -- should match OUTPUT_DIR from the previous script
-# ---------------------------------------------------------------------------
-CLEANED_DIR = r"C:\Users\shawa\Downloads\cleaned"
-# ---------------------------------------------------------------------------
 
-SERIOUS_DELINQUENCY_THRESHOLD = 3  # months past due (i.e. 90+ days)
+
+CLEANED_DIR = r"C:\Users\shawa\Downloads\cleaned"
+
+
+SERIOUS_DELINQUENCY_THRESHOLD = 3  
 
 
 def delinquency_severity(status):
@@ -82,8 +58,7 @@ if __name__ == "__main__":
 
     loan_level_df = orig_df.merge(labels_df, on="loan_id", how="left")
 
-    # Any loan with no performance records at all has an unknown outcome --
-    # flag it rather than silently assuming it's "good."
+
     missing_label = loan_level_df["ever_90dpd"].isna().sum()
     if missing_label > 0:
         print(f"\n  Note: {missing_label} loans had no matching performance records -- dropping them.")
