@@ -1,28 +1,3 @@
-"""
-04_train_baseline_model.py
-
-Trains on gold_train.csv (2005-2007 vintages) ONLY. The 2011-2012 monitor
-set stays completely untouched here -- phase 6 is where it gets scored,
-and it needs to be genuinely "unseen" for the drift story to mean anything.
-
-Trains two models for comparison:
-  - Logistic Regression: the model we actually document and monitor going
-    forward. Chosen deliberately over the more complex model -- in a
-    regulated lending context, a coefficient you can explain to an auditor
-    is often worth more than a percentage point of AUC.
-  - HistGradientBoostingClassifier: a stronger benchmark, kept only as a
-    reference point in the Model Card ("we chose interpretability over the
-    ~X point AUC the boosted model would have bought us").
-
-Outputs:
-  model.pkl              -- the trained logistic regression pipeline
-  metrics.json           -- validation metrics for both models
-  feature_importance.csv -- logistic regression coefficients, sorted
-  shap_summary.png       -- SHAP feature importance plot
-
-Run after phase 3:  python 04_train_baseline_model.py
-"""
-
 import os
 import json
 import joblib
@@ -76,7 +51,7 @@ if __name__ == "__main__":
         X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
     )
 
-    # --- Logistic Regression: the documented, monitored model ---
+
     print("\nTraining Logistic Regression (primary model)...")
     logreg_pipeline = Pipeline([
         ("scaler", StandardScaler()),
@@ -86,14 +61,13 @@ if __name__ == "__main__":
     logreg_metrics = evaluate(logreg_pipeline, X_val, y_val)
     print(f"  Validation AUC: {logreg_metrics['auc']}")
 
-    # --- HistGradientBoosting: benchmark only, not deployed ---
     print("\nTraining HistGradientBoostingClassifier (benchmark only)...")
     gbm = HistGradientBoostingClassifier(random_state=RANDOM_STATE)
     gbm.fit(X_train, y_train)
     gbm_metrics = evaluate(gbm, X_val, y_val)
     print(f"  Validation AUC: {gbm_metrics['auc']}")
 
-    # --- Save the chosen model ---
+
     model_path = os.path.join(MODEL_DIR, "model.pkl")
     joblib.dump(logreg_pipeline, model_path)
     print(f"\nSaved {model_path}")
@@ -110,7 +84,7 @@ if __name__ == "__main__":
         json.dump(metrics, f, indent=2)
     print(f"Saved metrics.json")
 
-    # --- Feature importance (logistic regression coefficients) ---
+
     coefs = logreg_pipeline.named_steps["clf"].coef_[0]
     importance_df = pd.DataFrame({"feature": feature_cols, "coefficient": coefs})
     importance_df["abs_coefficient"] = importance_df["coefficient"].abs()
@@ -118,7 +92,7 @@ if __name__ == "__main__":
     importance_df.to_csv(os.path.join(MODEL_DIR, "feature_importance.csv"), index=False)
     print("Saved feature_importance.csv")
 
-    # --- SHAP summary plot ---
+
     print("\nComputing SHAP values (this can take a minute)...")
     import shap
     X_val_scaled = logreg_pipeline.named_steps["scaler"].transform(X_val)
