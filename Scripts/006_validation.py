@@ -1,24 +1,3 @@
-"""
-06_monitoring_drift.py
-
-Scores the model (trained ONLY on 2005-2007) against the untouched
-2011-2012 monitor set, and measures two kinds of drift:
-
-  1. Data drift  -- have the input feature distributions shifted between
-     the training regime and the monitor regime? (Population Stability
-     Index, a standard credit-risk metric.)
-  2. Performance decay -- since the monitor set has real historical
-     outcomes (loans from 2011-2012 have played out by now), we can
-     measure actual AUC/precision/recall on it and compare to validation.
-
-Every computed number gets checked against the governance thresholds in
-config.py and assigned a status (Stable / Flag / Trigger Review) -- this
-table is what actually connects the monitoring dashboard to a governance
-action, which is the point of the whole project.
-
-Run after phase 4:  python 06_monitoring_drift.py
-"""
-
 import os
 import json
 import joblib
@@ -31,9 +10,6 @@ from config import (
 )
 from sklearn.metrics import roc_auc_score, precision_score, recall_score
 
-# Features we track drift on individually -- the continuous, business-
-# meaningful ones. Tracking PSI on every one-hot dummy column separately
-# would be noisy; these are the ones an actual model risk review would ask about.
 DRIFT_TRACKED_FEATURES = [
     "credit_score", "original_dti", "original_ltv",
     "original_interest_rate", "original_upb",
