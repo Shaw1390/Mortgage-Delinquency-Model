@@ -1,22 +1,3 @@
-"""
-01_load_and_clean.py
-
-Loads the raw pipe-delimited Freddie Mac origination + performance files,
-assigns the real column names (confirmed against the official July 2026
-file layout), and converts Freddie Mac's documented placeholder/"Not
-Available" codes into real nulls so they don't get treated as actual
-values downstream (e.g. a credit score of 9999, an MI% of 999).
-
-HOW TO USE:
-    1. Edit BASE_DIR and YEARS below.
-    2. This expects a subfolder per year, e.g.:
-           <BASE_DIR>/sample_2005/sample_orig_2005.txt
-           <BASE_DIR>/sample_2005/sample_perf_2005.txt
-       If your folders are named differently, adjust FOLDER_PATTERN.
-    3. Run directly:
-           python 01_load_and_clean.py
-"""
-
 import os
 import pandas as pd
 import numpy as np
@@ -92,8 +73,8 @@ def load_raw(filepath, column_names):
         sep="|",
         header=None,
         names=column_names,
-        dtype=str,           # read everything as string first -- safest for cleaning sentinels
-        na_filter=False,     # keep blanks as "" rather than NaN so our NA-value maps can catch them
+        dtype=str,           
+        na_filter=False,     
         encoding="latin-1",
     )
     return df
@@ -103,7 +84,6 @@ def clean_na_values(df, na_map):
     for col, sentinels in na_map.items():
         if col in df.columns:
             df[col] = df[col].replace(sentinels, np.nan)
-    # Any remaining blank strings across the whole frame become real nulls too
     df = df.replace("", np.nan)
     return df
 
